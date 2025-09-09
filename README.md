@@ -85,40 +85,7 @@ experiment:
 - Preprocess: Apply the same feature engineering, one-hot encodings, numeric conversions, and target mapping as described to produce the 11 input features and 6-class target.
 - Balance: Fit SMOTE on the training split only, then optionally apply Gaussian noise to numeric features in training for robustness.
 - Train and evaluate: Run cross-validated tuning per model and evaluate on the untouched test set with accuracy, weighted precision/recall/F1, classification reports, and confusion matrices.
-- 
-## Training examples
-XGBoost sketch:
-```
-from xgboost import XGBClassifier
-from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import classification_report, accuracy_score, f1_score
-
-xgb = XGBClassifier(
-    objective='multi:softprob',
-    num_class=6,
-    eval_metric='mlogloss',
-    tree_method='hist',
-    random_state=42
-)
-
-param_grid = {
-    'n_estimators': [200, 400],
-    'max_depth': [4, 6, 8],
-    'learning_rate': [0.05, 0.1],
-    'subsample': [0.8, 1.0],
-    'colsample_bytree': [0.8, 1.0]
-}
-
-clf = GridSearchCV(xgb, param_grid, scoring='f1_weighted', cv=5, n_jobs=-1)
-clf.fit(X_train_bal, y_train_bal)
-
-y_pred = clf.predict(X_test)
-print('Accuracy:', accuracy_score(y_test, y_pred))
-print('Weighted F1:', f1_score(y_test, y_pred, average='weighted'))
-print(classification_report(y_test, y_pred))
-```
-
-
+  
 ## Evaluation
 - Primary metrics: Accuracy, Weighted Precision, Weighted Recall, Weighted F1 to reflect multiclass balance and practical performance under class skew.
 - Diagnostics: Confusion matrices and per-class reports to examine boundary errors between adjacent severity levels and minority classes.
@@ -139,7 +106,7 @@ Predictions should augment, not replace, professional clinical judgment, and any
 - Feature expansion to include behavioral, social, and contextual signals (e.g., sleep, workload, support networks), plus ordinal/regression objectives and calibration.
 
 ## Project structure (suggested)
-This structure supports clarity and reproducibility; adapt paths and names to the existing codebase as needed.
+This structure supports clarity and reproducibility;
 ```
 .
 ├── data/
