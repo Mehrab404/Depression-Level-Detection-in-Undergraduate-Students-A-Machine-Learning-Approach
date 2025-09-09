@@ -12,7 +12,7 @@ This project builds supervised models to detect depression severity levels (No, 
 - Demo video — YouTube project demo link to be included in this section without exposing the URL inline per repository policy.
 
 ## Demo video
-A short project walkthrough video is available on YouTube; place the link here or in the repository sidebar/description while keeping this README link-free to comply with repository guidelines for concise overviews.
+A short project walkthrough video is available on YouTube. 
 
 ## Key findings
 - XGBoost is the top performer with Accuracy 0.9495 and Weighted F1 0.9495 on the test set.
